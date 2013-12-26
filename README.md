@@ -1,6 +1,8 @@
 Emathnumberline
 ==============
 
+See the [demo page](http://e-math.github.io/emathnumberline/).
+
 What?
 -----
 A tool for creating numberlines with points, intervals and distances.
@@ -85,4 +87,4 @@ jQuery('#box').emathnumberline({
     }
 });
 ```
-For more examples, see the demo page.
+For more examples, see the [demo page](http://e-math.github.io/emathnumberline/).
