@@ -40,6 +40,7 @@ Init a new numberline with given data.
 * Draggable points (gliders)
 * Intervals (ranges)
 * Distances (length), that show the distance of two points with biheaded arrow and a number.
+
 ```javascript
 jQuery('#box').emathnumberline({
     text: "",
