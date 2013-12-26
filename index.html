@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Emathnumberline - A jquery table tool</title>
+        <meta charset="UTF-8">
+        <link type="text/css" rel="stylesheet" media="all" href="style.css" />
+        <link type="text/css" rel="stylesheet" media="all" href="jsxgraph.css" />
+        <script type="text/javascript" src="jquery.min.js"></script>
+        <script type="text/javascript" src="jsxgraphcore.js"></script>
+        <script type="text/javascript" src="jquery.emathnumberline.js"></script>
+        <script type="text/javascript">
+            jQuery(function(){
+                var data = {
+                    "nline0": {
+                        "text":"",
+                        "startval":-10,
+                        "endval":10,
+                        "points": {
+                            "-3": {
+                                "ptype":"point",
+                                "xcoord": -3,
+                                "color": "red",
+                                "fillcolor": "red",
+                                "face": "o"
+                            },
+                            "2": {
+                                "ptype": "point",
+                                "xcoord": 2,
+                                "color": "red",
+                                "fillcolor": "red",
+                                "face": "o"
+                            },
+                            "A": {
+                                "ptype": "glider",
+                                "xcoord": 5,
+                                "color": "green",
+                                "fillcolor": "white",
+                                "face": "o"
+                            },
+                            "B": {
+                                "ptype": "glider",
+                                "xcoord": -4.5,
+                                "color": "blue",
+                                "fillcolor": "blue",
+                                "face": "x"
+                            }
+                        }
+                    },
+                    "nline1": {
+                        "text": "",
+                        "startval": -5,
+                        "endval": 5,
+                        "points": {
+                            "-3": {
+                                "ptype": 'point',
+                                "xcoord": -3,
+                                "color": "red",
+                                "fillColor": "red",
+                                "face": "o"
+                            },
+                            "0": {
+                                "ptype": "point",
+                                "xcoord": 0,
+                                "color": "red",
+                                "fillcolor": "red",
+                                "face": "o"
+                            },
+                            "A": {
+                                "ptype": "glider",
+                                "xcoord": 2,
+                                "color": "red",
+                                "fillcolor": "white",
+                                "face": "o"
+                            },
+                            "infty": {
+                                "ptype":"point",
+                                "xcoord": 100,
+                                "color": "black",
+                                "fillcolor": "black",
+                                "face": "o"
+                            }
+                        },
+                        "ranges": {
+                            "interval1": {
+                                "from": "-3",
+                                "to": "0",
+                                "color": "blue",
+                                "rtype": "range"
+                            },
+                            "interval2": {
+                                "from": "A",
+                                "to": "infty",
+                                "color": "blue",
+                                "rtype": "range"
+                            }
+                        }
+                    },
+                    "nline2": {
+                        "text":"",
+                        "startval":-5,
+                        "endval":5,
+                        "points": {
+                            "A": {
+                                "ptype": "glider",
+                                "xcoord": 4,
+                                "color": "red",
+                                "fillcolor": "red",
+                                "face": "o"
+                            },
+                            "B": {
+                                "ptype": "glider",
+                                "xcoord": 1,
+                                "color": "red",
+                                "fillcolor": "red",
+                                "face": "o"
+                            },
+                            "C": {
+                                "ptype":"glider",
+                                "xcoord": -1,
+                                "color": "green",
+                                "fillcolor": "green",
+                                "face": "o"
+                            }
+                        },
+                        "ranges": {
+                            "dist1": {
+                                "from": "A",
+                                "to": "B",
+                                "color": "blue",
+                                "rtype": "length"
+                            },
+                            "dist2": {
+                                "from": "C",
+                                "to": "B",
+                                "color": "blue",
+                                "rtype": "length"
+                            }
+                        }
+                    }
+                };
+
+                jQuery('#box1').emathnumberline(data.nline0);
+                jQuery('#box2').emathnumberline(data.nline1);
+                jQuery('#box3').emathnumberline(data.nline2);
+                jQuery('body').delegate('#box1', 'emnlchanged', function(e){
+                    var $box = $(this);
+                    var data = $box.emathnumberline('get');
+                    var valueA = data.points['A'].xcoord;
+                    var valueB = data.points['B'].xcoord;
+                    jQuery('#box1Aval').html(valueA);
+                    jQuery('#box1Bval').html(valueB);
+                });
+                jQuery('#box1').trigger('emnlchanged');
+            });
+        </script>
+    </head>
+    <body>
+        <header>
+            <div id="head-content">
+                <img id="logo" src="images/emath-logo.png" alt="E-Math" />
+                <h1>Emathnumberline</h1>
+                <h2>Create interactive numberlines</h2>
+            </div>
+        </header>
+        <article class="content">
+            <p>Here are couple of examples, how to use <code>jquery.emathnumberline.js</code>. This tool
+            depends on <a href="http://jquery.com/">jQuery</a> and <a href="http://jsxgraph.uni-bayreuth.de/">JSXGraph</a>.</p>
+            <h2>Points on numberline</h2>
+            <p>You can create a numberline with static points and interactive points (gliders).
+            The numberline is created from a html-element with jQuery-method <code>$element.emathnumberline(data)</code>,
+            which takes the data of the numberline as object parameter. Gliders can
+            be dragged and the current data can be asked from the numberline with
+            <code>$element.emathnumberline('get')</code>.</p>
+            <p>You can give the color and fillcolor of points and their face ('o', 'x', '&lt;&gt;', '^', '[]').</p>
+            <div id="box1"></div>
+            <div>A: <span id="box1Aval"></span>, B: <span id="box1Bval"></span></div>
+            <div class="codewrapper">
+<div class="codeexample">
+&lt;div class="box"&gt;
+&lt;/div&gt;
+&lt;script type="text/javascript"&gt;
+    jQuery('.box').emathnumberline({
+        "text":"",
+        "startval":-10,
+        "endval":10,
+        "points": {
+            "-3": {
+                "ptype":"point",
+                "xcoord": -3,
+                "color": "red",
+                "fillcolor": "red",
+                "face": "o"
+            },
+            "2": {
+                "ptype": "point",
+                "xcoord": 2,
+                "color": "red",
+                "fillcolor": "red",
+                "face": "o"
+            },
+            "A": {
+                "ptype": "glider",
+                "xcoord": 5,
+                "color": "green",
+                "fillcolor": "white",
+                "face": "o"
+            },
+            "B": {
+                "ptype": "glider",
+                "xcoord": -4.5,
+                "color": "blue",
+                "fillcolor": "blue",
+                "face": "x"
+            }
+        }
+    });
+&lt;/script&gt;
+</div>
+            </div>
+            <h2>Intervals on numberline</h2>
+            <p>You can add intervals between points.</p>
+            <div id="box2"></div>
+            <div class="codewrapper">
+<div class="codeexample">
+&lt;div class="box"&gt;
+&lt;/div&gt;
+&lt;script type="text/javascript"&gt;
+    jQuery('.box').emathnumberline({
+        "text": "",
+        "startval": -5,
+        "endval": 5,
+        "points": {
+            "-3": {
+                "ptype": 'point',
+                "xcoord": -3,
+                "color": "red",
+                "fillColor": "red",
+                "face": "o"
+            },
+            "0": {
+                "ptype": "point",
+                "xcoord": 0,
+                "color": "red",
+                "fillcolor": "red",
+                "face": "o"
+            },
+            "A": {
+                "ptype": "glider",
+                "xcoord": 2,
+                "color": "red",
+                "fillcolor": "white",
+                "face": "o"
+            },
+            "infty": {
+                "ptype":"point",
+                "xcoord": 100,
+                "color": "black",
+                "fillcolor": "black",
+                "face": "o"
+            }
+        },
+        "ranges": {
+            "interval1": {
+                "from": "-3",
+                "to": "0",
+                "color": "blue",
+                "rtype": "range"
+            },
+            "interval2": {
+                "from": "A",
+                "to": "infty",
+                "color": "blue",
+                "rtype": "range"
+            }
+        }
+    });
+&lt;/script&gt;
+</div>
+            </div>
+            <h2>Distances on numberline</h2>
+            <p>You can also add biheaded arrows to show distances between two points.</p>
+            <div id="box3"></div>
+            <div class="codewrapper">
+<div class="codeexample">
+&lt;div class="box"&gt;
+&lt;/div&gt;
+&lt;script type="text/javascript"&gt;
+    jQuery('.box').emathnumberline({
+        "text":"",
+        "startval":-5,
+        "endval":5,
+        "points": {
+            "A": {
+                "ptype": "glider",
+                "xcoord": 4,
+                "color": "red",
+                "fillcolor": "red",
+                "face": "o"
+            },
+            "B": {
+                "ptype": "glider",
+                "xcoord": 1,
+                "color": "red",
+                "fillcolor": "red",
+                "face": "o"
+            },
+            "C": {
+                "ptype":"glider",
+                "xcoord": -1,
+                "color": "green",
+                "fillcolor": "green",
+                "face": "o"
+            }
+        },
+        "ranges": {
+            "dist1": {
+                "from": "A",
+                "to": "B",
+                "color": "blue",
+                "rtype": "length"
+            },
+            "dist2": {
+                "from": "C",
+                "to": "B",
+                "color": "blue",
+                "rtype": "length"
+            }
+        }
+    });
+&lt;/script&gt;
+</div>
+            </div>
+        </article>
+        <footer>
+            <div id="disclaimerbox">
+                <div id="leftlogo">
+                    <img src="images/CB_logo-200.png" alt="" />
+                </div>
+                <div id="rightlogo">
+                    <img src="images/EU_with_references-300.png" alt="" />
+                </div>
+                <div id="disclaimer">
+                    The contents of the website reflect the authors' views. The Managing Authority of the Central Baltic INTERREG IVA Programme cannot be held liable for the information published by the project partners. 
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>
