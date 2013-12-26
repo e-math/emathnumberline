@@ -13,7 +13,7 @@ Emathnumberline is a jQuery-plugin and can be embedded on any web page
 by including `jquery.emathnumberline.js`-file and defining some html-element
 as a numberline with: `$('#mydiv').emathnumberline(data)`.
 
-Emathtable depends on external JavaScript libraries:
+Emathnumberline depends on external JavaScript libraries:
 * jQuery
 * JSXGraph
 
